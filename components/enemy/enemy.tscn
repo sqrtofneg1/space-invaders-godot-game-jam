@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c81lpnhmfbods"]
+
+[ext_resource type="Script" uid="uid://bl5msqwxq52lk" path="res://components/enemy/enemy.gd" id="1_8ajy2"]
+[ext_resource type="Texture2D" uid="uid://dnitekiyuj7ed" path="res://components/enemy/enemy.png" id="2_mdji8"]
+[ext_resource type="AudioStream" uid="uid://bjjyy4j7f7dfc" path="res://common/sfx/enemy_shoot.wav" id="3_mdji8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6usr"]
+size = Vector2(128, 64)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=361587624]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_8ajy2")
+
+[node name="BaseSprite" type="Sprite2D" parent="." unique_id=1372297071]
+modulate = Color(0, 1, 1, 1)
+texture = ExtResource("2_mdji8")
+
+[node name="ProjectileSpawnPosition" type="Marker2D" parent="." unique_id=1302589044]
+unique_name_in_owner = true
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1948681692]
+position = Vector2(4.7683716e-07, -4.3711346e-08)
+shape = SubResource("RectangleShape2D_q6usr")
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="." unique_id=1669769789]
+unique_name_in_owner = true
+stream = ExtResource("3_mdji8")
+volume_db = -25.0
+pitch_scale = 0.9

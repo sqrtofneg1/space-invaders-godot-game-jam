@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dfq6d3x5qit4i"]
+
+[ext_resource type="Script" uid="uid://64eirvsc1toh" path="res://components/player/player.gd" id="1_waih8"]
+[ext_resource type="Texture2D" uid="uid://owoiffrqo06x" path="res://components/player/player.png" id="2_ph1f6"]
+[ext_resource type="AudioStream" uid="uid://bivj2n8vc2pld" path="res://common/sfx/player_shoot.wav" id="3_ph1f6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hevo"]
+size = Vector2(128, 32)
+
+[node name="Player" type="CharacterBody2D" unique_id=1901416476]
+collision_layer = 2
+script = ExtResource("1_waih8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=520121163]
+position = Vector2(0, -8)
+texture = ExtResource("2_ph1f6")
+
+[node name="ProjectileSpawnPosition" type="Marker2D" parent="." unique_id=487336667]
+unique_name_in_owner = true
+position = Vector2(0, -26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1014643547]
+position = Vector2(4.7683716e-07, -4.3711346e-08)
+shape = SubResource("RectangleShape2D_1hevo")
+
+[node name="ShootCooldown" type="Timer" parent="." unique_id=1887080598]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="ShootSFX" type="AudioStreamPlayer" parent="." unique_id=359185508]
+unique_name_in_owner = true
+stream = ExtResource("3_ph1f6")
+volume_db = -15.0
+pitch_scale = 1.1

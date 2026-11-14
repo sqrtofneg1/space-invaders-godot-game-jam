@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://dmov0n6cflnxj"]
+
+[ext_resource type="Script" uid="uid://b8qgljfi4ut1u" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="PackedScene" uid="uid://c81lpnhmfbods" path="res://components/enemy/enemy.tscn" id="2_4fuuu"]
+[ext_resource type="PackedScene" uid="uid://dfq6d3x5qit4i" path="res://components/player/player.tscn" id="2_vasa2"]
+[ext_resource type="AudioStream" uid="uid://c0ffv1l8nwtck" path="res://common/sfx/hit.wav" id="4_4fuuu"]
+[ext_resource type="AudioStream" uid="uid://o44jal8svjmx" path="res://common/sfx/victory.wav" id="5_dxrkv"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vasa2"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h7iqs"]
+normal = Vector2(-1, 0)
+
+[node name="Game" type="Node2D" unique_id=156740021]
+script = ExtResource("1_l1rk1")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=520052765]
+layer = -1
+
+[node name="BackgroundColor" type="ColorRect" parent="BackgroundLayer" unique_id=143201205]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08468992, 0.08468992, 0.08468992, 1)
+
+[node name="AnnouncementLabel" type="Label" parent="BackgroundLayer" unique_id=863080697]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.5568628)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameRestartDelay" type="Timer" parent="." unique_id=1137823602]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="EnemyShootTimer" type="Timer" parent="." unique_id=478510158]
+unique_name_in_owner = true
+autostart = true
+
+[node name="EnemyContainer" type="Node2D" parent="." unique_id=2075337948]
+unique_name_in_owner = true
+
+[node name="Enemy" parent="EnemyContainer" unique_id=361587624 instance=ExtResource("2_4fuuu")]
+position = Vector2(174, 94)
+
+[node name="Enemy2" parent="EnemyContainer" unique_id=1888119020 instance=ExtResource("2_4fuuu")]
+position = Vector2(558, 94)
+
+[node name="Enemy3" parent="EnemyContainer" unique_id=1085152164 instance=ExtResource("2_4fuuu")]
+position = Vector2(961, 96)
+
+[node name="Enemy4" parent="EnemyContainer" unique_id=256644826 instance=ExtResource("2_4fuuu")]
+position = Vector2(1353, 100)
+
+[node name="Enemy5" parent="EnemyContainer" unique_id=609370896 instance=ExtResource("2_4fuuu")]
+position = Vector2(1702, 102)
+
+[node name="Enemy6" parent="EnemyContainer" unique_id=802808623 instance=ExtResource("2_4fuuu")]
+position = Vector2(174, 276)
+
+[node name="Enemy7" parent="EnemyContainer" unique_id=981994627 instance=ExtResource("2_4fuuu")]
+position = Vector2(568, 285)
+
+[node name="Enemy8" parent="EnemyContainer" unique_id=1523264915 instance=ExtResource("2_4fuuu")]
+position = Vector2(950, 297)
+
+[node name="Enemy9" parent="EnemyContainer" unique_id=1936060108 instance=ExtResource("2_4fuuu")]
+position = Vector2(1353, 297)
+
+[node name="Enemy10" parent="EnemyContainer" unique_id=28155152 instance=ExtResource("2_4fuuu")]
+position = Vector2(1709, 297)
+
+[node name="Player" parent="." unique_id=1901416476 instance=ExtResource("2_vasa2")]
+unique_name_in_owner = true
+position = Vector2(964, 1064)
+
+[node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=1040491169]
+position = Vector2(1, 1080)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1663045548]
+shape = SubResource("WorldBoundaryShape2D_vasa2")
+
+[node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1895064204]
+position = Vector2(1920, 1080)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=839646617]
+shape = SubResource("WorldBoundaryShape2D_h7iqs")
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="." unique_id=1533403744]
+unique_name_in_owner = true
+stream = ExtResource("4_4fuuu")
+max_polyphony = 8
+
+[node name="VictorySFX" type="AudioStreamPlayer" parent="." unique_id=144659012]
+unique_name_in_owner = true
+stream = ExtResource("5_dxrkv")
