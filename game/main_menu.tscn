@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c4h78eo5by4r8"]
+
+[ext_resource type="FontFile" uid="uid://bb2qxnta7v2bm" path="res://space_invaders.ttf" id="1_2gctw"]
+
+[node name="MainMenu" type="Node2D" unique_id=702313976]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2065412295]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1153114025]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_2gctw")
+text = "Space Invaders"
