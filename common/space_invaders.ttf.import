@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bb2qxnta7v2bm"
-path="res://.godot/imported/space_invaders.ttf-eb704e4d1277cd355a3456d33506804d.fontdata"
+path="res://.godot/imported/space_invaders.ttf-5cd2ba6a3edd48aba833479533955aa3.fontdata"
 
 [deps]
 
-source_file="res://space_invaders.ttf"
-dest_files=["res://.godot/imported/space_invaders.ttf-eb704e4d1277cd355a3456d33506804d.fontdata"]
+source_file="res://common/space_invaders.ttf"
+dest_files=["res://.godot/imported/space_invaders.ttf-5cd2ba6a3edd48aba833479533955aa3.fontdata"]
 
 [params]
 

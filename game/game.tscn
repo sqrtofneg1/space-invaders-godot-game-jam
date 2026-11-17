@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://c0ffv1l8nwtck" path="res://common/sfx/hit.wav" id="4_4fuuu"]
 [ext_resource type="AudioStream" uid="uid://o44jal8svjmx" path="res://common/sfx/victory.wav" id="5_dxrkv"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oj3vu"]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vasa2"]
 normal = Vector2(1, 0)
 
@@ -19,6 +21,7 @@ script = ExtResource("1_l1rk1")
 layer = -1
 
 [node name="BackgroundColor" type="ColorRect" parent="BackgroundLayer" unique_id=143201205]
+material = SubResource("ShaderMaterial_oj3vu")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
