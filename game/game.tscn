@@ -105,7 +105,7 @@ position = Vector2(1709, 297)
 
 [node name="Player" parent="." unique_id=1901416476 instance=ExtResource("2_vasa2")]
 unique_name_in_owner = true
-position = Vector2(964, 1064)
+position = Vector2(964, 1000)
 
 [node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=1040491169]
 position = Vector2(1, 1080)

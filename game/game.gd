@@ -15,6 +15,11 @@ var enemies: Array[Enemy] = []
 
 # Game setup
 func _ready() -> void:
+	pass
+
+
+# Restart game by reloading the current scene
+func restart() -> void:
 	# Hook up all enemies in the enemy container node
 	for child in enemy_container.get_children():
 		if child is Enemy:
@@ -25,11 +30,6 @@ func _ready() -> void:
 	enemy_shoot_timer.timeout.connect(_on_enemy_shoot_timer_timeout)
 	game_restart_delay.timeout.connect(_on_game_restart_delay_timeout)
 	player.destroyed.connect(_on_player_destroyed)
-
-
-# Restart game by reloading the current scene
-func restart() -> void:
-	get_tree().reload_current_scene()
 
 
 # Check for victory by all enemies destroyed (unless already game over)
