@@ -73,3 +73,9 @@ func _on_player_destroyed() -> void:
 	announcement_label.text = "GAME OVER"
 	enemy_shoot_timer.stop()
 	game_restart_delay.start()
+
+
+func _add_enemies(number_to_add: int) -> void:
+	for i in number_to_add:
+		var new_enemy = Enemy.new()
+		enemy_container.add_child(new_enemy)
