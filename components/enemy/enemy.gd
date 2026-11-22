@@ -10,8 +10,8 @@ const PROJECTILE_SCENE := preload("uid://dpieyslanfybp") as PackedScene
 @onready var projectile_spawn_position: Marker2D = %ProjectileSpawnPosition
 
 
-var move_speed: float = 320.0
-var move_speed_down: float = 10
+var move_speed: float = 3.0
+var move_speed_down: float = 0.5
 var move_speed_randomizer: float = 1.0
 var min_decision_time: float = 0.5
 var max_decision_time: float = 2.0
@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y += move_speed_down * delta * move_speed_randomizer
 
 	velocity.x = direction * move_speed * move_speed_randomizer
-	move_and_slide()
+	move_and_collide(Vector2(velocity.x, velocity.y))
 
 
 func _pick_random_direction() -> void:
