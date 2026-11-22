@@ -10,6 +10,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oj3vu"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hatf2"]
+distance = -1080.0
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vasa2"]
 normal = Vector2(1, 0)
 
@@ -73,35 +76,56 @@ autostart = true
 [node name="EnemyContainer" type="Node2D" parent="." unique_id=2075337948]
 unique_name_in_owner = true
 
+[node name="SpawnPoint" type="Marker2D" parent="EnemyContainer" unique_id=1504121306]
+unique_name_in_owner = true
+position = Vector2(960, 50)
+
 [node name="Enemy" parent="EnemyContainer" unique_id=361587624 instance=ExtResource("2_4fuuu")]
 position = Vector2(174, 94)
+collision_mask = 4
 
 [node name="Enemy2" parent="EnemyContainer" unique_id=1888119020 instance=ExtResource("2_4fuuu")]
 position = Vector2(558, 94)
+collision_mask = 4
 
 [node name="Enemy3" parent="EnemyContainer" unique_id=1085152164 instance=ExtResource("2_4fuuu")]
 position = Vector2(961, 96)
+collision_mask = 4
 
 [node name="Enemy4" parent="EnemyContainer" unique_id=256644826 instance=ExtResource("2_4fuuu")]
 position = Vector2(1353, 100)
+collision_mask = 4
 
 [node name="Enemy5" parent="EnemyContainer" unique_id=609370896 instance=ExtResource("2_4fuuu")]
 position = Vector2(1702, 102)
+collision_mask = 4
 
 [node name="Enemy6" parent="EnemyContainer" unique_id=802808623 instance=ExtResource("2_4fuuu")]
 position = Vector2(174, 276)
+collision_mask = 4
 
 [node name="Enemy7" parent="EnemyContainer" unique_id=981994627 instance=ExtResource("2_4fuuu")]
 position = Vector2(568, 285)
+collision_mask = 4
 
 [node name="Enemy8" parent="EnemyContainer" unique_id=1523264915 instance=ExtResource("2_4fuuu")]
 position = Vector2(950, 297)
+collision_mask = 4
 
 [node name="Enemy9" parent="EnemyContainer" unique_id=1936060108 instance=ExtResource("2_4fuuu")]
 position = Vector2(1353, 297)
+collision_mask = 4
 
 [node name="Enemy10" parent="EnemyContainer" unique_id=28155152 instance=ExtResource("2_4fuuu")]
 position = Vector2(1709, 297)
+collision_mask = 4
+
+[node name="BottomBoundary" type="Area2D" parent="EnemyContainer" unique_id=28980897]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyContainer/BottomBoundary" unique_id=847078733]
+shape = SubResource("WorldBoundaryShape2D_hatf2")
 
 [node name="Player" parent="." unique_id=1901416476 instance=ExtResource("2_vasa2")]
 unique_name_in_owner = true
@@ -109,12 +133,16 @@ position = Vector2(964, 1000)
 
 [node name="LeftBoundary" type="StaticBody2D" parent="." unique_id=1040491169]
 position = Vector2(1, 1080)
+collision_layer = 5
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBoundary" unique_id=1663045548]
 shape = SubResource("WorldBoundaryShape2D_vasa2")
 
 [node name="RightBoundary" type="StaticBody2D" parent="." unique_id=1895064204]
 position = Vector2(1920, 1080)
+collision_layer = 5
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBoundary" unique_id=839646617]
 shape = SubResource("WorldBoundaryShape2D_h7iqs")
@@ -127,3 +155,5 @@ max_polyphony = 8
 [node name="VictorySFX" type="AudioStreamPlayer" parent="." unique_id=144659012]
 unique_name_in_owner = true
 stream = ExtResource("5_dxrkv")
+
+[connection signal="body_entered" from="EnemyContainer/BottomBoundary" to="." method="_on_bottom_boundary_body_entered"]

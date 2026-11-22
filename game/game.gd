@@ -11,7 +11,7 @@ var enemies: Array[Enemy] = []
 @onready var player: Player = %Player
 @onready var hit_sfx: AudioStreamPlayer = %HitSFX
 @onready var victory_sfx: AudioStreamPlayer = %VictorySFX
-
+@onready var spawn_point: Marker2D = %SpawnPoint
 
 # Game setup
 func _ready() -> void:
@@ -79,3 +79,10 @@ func _add_enemies(number_to_add: int) -> void:
 	for i in number_to_add:
 		var new_enemy = Enemy.new()
 		enemy_container.add_child(new_enemy)
+		new_enemy.global_position = spawn_point.global_position
+
+
+func _on_bottom_boundary_body_entered(body: Node2D) -> void:
+	print(body.position)
+	if body is Enemy:
+		body.global_position.y = spawn_point.global_position.y
