@@ -12,28 +12,24 @@ var enemies: Array[Enemy] = []
 @onready var hit_sfx: AudioStreamPlayer = %HitSFX
 @onready var victory_sfx: AudioStreamPlayer = %VictorySFX
 @onready var spawn_point: Marker2D = %SpawnPoint
+const ENEMY = preload("res://components/enemy/enemy.tscn")
 
 # Game setup
 func _ready() -> void:
-	pass
+	enemy_shoot_timer.timeout.connect(_on_enemy_shoot_timer_timeout)
+	game_restart_delay.timeout.connect(_on_game_restart_delay_timeout)
+	player.destroyed.connect(_on_player_destroyed)
+	_add_enemies(10)
 
 
 # Restart game by reloading the current scene
 func restart() -> void:
-	# Hook up all enemies in the enemy container node
-	for child in enemy_container.get_children():
-		if child is Enemy:
-			child.destroyed.connect(_on_enemy_destroyed.bind(child))
-			enemies.append(child)
-	
-	# Signals
-	enemy_shoot_timer.timeout.connect(_on_enemy_shoot_timer_timeout)
-	game_restart_delay.timeout.connect(_on_game_restart_delay_timeout)
-	player.destroyed.connect(_on_player_destroyed)
+	pass
 
 
 # Check for victory by all enemies destroyed (unless already game over)
 func check_for_victory() -> void:
+	print(enemies.size())
 	if not enemies.is_empty() or not game_restart_delay.is_stopped():
 		return
 	
@@ -76,11 +72,22 @@ func _on_player_destroyed() -> void:
 
 
 func _add_enemies(number_to_add: int) -> void:
+	print("in add enemies")
 	for i in number_to_add:
-		var new_enemy = Enemy.new()
-		enemy_container.add_child(new_enemy)
-		new_enemy.global_position = spawn_point.global_position
+		var timer = Timer.new()
+		timer.wait_time = i + 1
+		timer.timeout.connect(_spawn_enemy)
+		timer.one_shot = true
+		timer.autostart = true
+		add_child(timer)
 
+func _spawn_enemy() -> void:
+	print("HERE")
+	var new_enemy = ENEMY.instantiate()
+	enemy_container.add_child(new_enemy)
+	new_enemy.global_position = spawn_point.global_position
+	enemies.append(new_enemy)
+	new_enemy.destroyed.connect(_on_enemy_destroyed.bind(new_enemy))
 
 func _on_bottom_boundary_body_entered(body: Node2D) -> void:
 	print(body.position)

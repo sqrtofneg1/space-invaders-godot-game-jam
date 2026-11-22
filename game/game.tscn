@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dmov0n6cflnxj"]
 
 [ext_resource type="Script" uid="uid://b8qgljfi4ut1u" path="res://game/game.gd" id="1_l1rk1"]
-[ext_resource type="PackedScene" uid="uid://c81lpnhmfbods" path="res://components/enemy/enemy.tscn" id="2_4fuuu"]
 [ext_resource type="Texture2D" uid="uid://cn5ltcek2txah" path="res://common/Stars layer.png" id="2_u5opy"]
 [ext_resource type="PackedScene" uid="uid://dfq6d3x5qit4i" path="res://components/player/player.tscn" id="2_vasa2"]
 [ext_resource type="Texture2D" uid="uid://bn1sm80rful7x" path="res://common/Nebula layer.png" id="3_y36n6"]
@@ -76,49 +75,11 @@ autostart = true
 [node name="EnemyContainer" type="Node2D" parent="." unique_id=2075337948]
 unique_name_in_owner = true
 
+[node name="EnemySpawnTimer" type="Timer" parent="EnemyContainer" unique_id=473587646]
+
 [node name="SpawnPoint" type="Marker2D" parent="EnemyContainer" unique_id=1504121306]
 unique_name_in_owner = true
 position = Vector2(960, 50)
-
-[node name="Enemy" parent="EnemyContainer" unique_id=361587624 instance=ExtResource("2_4fuuu")]
-position = Vector2(174, 94)
-collision_mask = 4
-
-[node name="Enemy2" parent="EnemyContainer" unique_id=1888119020 instance=ExtResource("2_4fuuu")]
-position = Vector2(558, 94)
-collision_mask = 4
-
-[node name="Enemy3" parent="EnemyContainer" unique_id=1085152164 instance=ExtResource("2_4fuuu")]
-position = Vector2(961, 96)
-collision_mask = 4
-
-[node name="Enemy4" parent="EnemyContainer" unique_id=256644826 instance=ExtResource("2_4fuuu")]
-position = Vector2(1353, 100)
-collision_mask = 4
-
-[node name="Enemy5" parent="EnemyContainer" unique_id=609370896 instance=ExtResource("2_4fuuu")]
-position = Vector2(1702, 102)
-collision_mask = 4
-
-[node name="Enemy6" parent="EnemyContainer" unique_id=802808623 instance=ExtResource("2_4fuuu")]
-position = Vector2(174, 276)
-collision_mask = 4
-
-[node name="Enemy7" parent="EnemyContainer" unique_id=981994627 instance=ExtResource("2_4fuuu")]
-position = Vector2(568, 285)
-collision_mask = 4
-
-[node name="Enemy8" parent="EnemyContainer" unique_id=1523264915 instance=ExtResource("2_4fuuu")]
-position = Vector2(950, 297)
-collision_mask = 4
-
-[node name="Enemy9" parent="EnemyContainer" unique_id=1936060108 instance=ExtResource("2_4fuuu")]
-position = Vector2(1353, 297)
-collision_mask = 4
-
-[node name="Enemy10" parent="EnemyContainer" unique_id=28155152 instance=ExtResource("2_4fuuu")]
-position = Vector2(1709, 297)
-collision_mask = 4
 
 [node name="BottomBoundary" type="Area2D" parent="EnemyContainer" unique_id=28980897]
 collision_layer = 5
