@@ -13,22 +13,35 @@ var enemies: Array[Enemy] = []
 @onready var victory_sfx: AudioStreamPlayer = %VictorySFX
 @onready var spawn_point: Marker2D = %SpawnPoint
 const ENEMY = preload("res://components/enemy/enemy.tscn")
+@onready var hud_player_name: Label = %HudPlayerName
+@onready var hud_ship_name: Label = %HudShipName
 
 # Game setup
 func _ready() -> void:
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-	_do_dialog_1()
+	_do_dialog(GameState.level)
 	enemy_shoot_timer.timeout.connect(_on_enemy_shoot_timer_timeout)
 	game_restart_delay.timeout.connect(_on_game_restart_delay_timeout)
 	player.destroyed.connect(_on_player_destroyed)
-	_add_enemies(10)
+	_add_enemies(5)
 
 func _on_dialogue_started(_resource: DialogueResource) -> void:
 	get_tree().paused = true
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	get_tree().paused = false
+
+func _next_level() -> void:
+	if GameState.level == 3:
+		victory()
+		return
+	GameState.level += 1
+	_do_dialog(GameState.level)
+	enemy_shoot_timer.timeout.connect(_on_enemy_shoot_timer_timeout)
+	game_restart_delay.timeout.connect(_on_game_restart_delay_timeout)
+	player.destroyed.connect(_on_player_destroyed)
+	_add_enemies(5 * GameState.level)
 
 
 # Restart game by reloading the current scene
@@ -43,8 +56,13 @@ func check_for_victory() -> void:
 	for timer in get_tree().get_nodes_in_group("enemy_spawn_timers"):
 		if timer is Timer and not timer.is_stopped():
 			return
-	announcement_label.text = "VICTORY"
-	game_restart_delay.start()
+	_next_level()
+	#announcement_label.text = "VICTORY"
+	#game_restart_delay.start()
+	#victory_sfx.play()
+
+func victory() -> void:
+	announcement_label.text = "And so, {name} annihilated the entire alien race.\nVICTORY?".format({"name": GameState.real_player_name})
 	victory_sfx.play()
 
 
@@ -99,6 +117,12 @@ func _spawn_enemy() -> void:
 	new_enemy.global_position.x = randf_range(10, 1800)
 	enemies.append(new_enemy)
 	new_enemy.destroyed.connect(_on_enemy_destroyed.bind(new_enemy))
+	if GameState.level < 3:
+		hud_player_name.text = GameState.player_name
+		hud_ship_name.text = GameState.player_ship_name
+	else:
+		hud_player_name.text = GameState.real_player_name
+		hud_ship_name.text = GameState.real_player_ship_name
 
 func _on_bottom_boundary_body_entered(body: Node2D) -> void:
 	print(body.position)
@@ -106,6 +130,6 @@ func _on_bottom_boundary_body_entered(body: Node2D) -> void:
 		body.global_position.y = spawn_point.global_position.y
 
 
-func _do_dialog_1() -> void:
-	DialogueManager.show_dialogue_balloon(load("res://mission1.dialogue"))
+func _do_dialog(level: int) -> void:
+	DialogueManager.show_dialogue_balloon(load("res://mission{level}.dialogue".format({"level":level})))
 	

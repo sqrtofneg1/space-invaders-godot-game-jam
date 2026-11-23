@@ -4,9 +4,13 @@ Commander Hyperion: The Astral Encroachment Guard & Interception System, or AEGI
 Commander Hyperion: Before we begin, what is your name?
 do GameState.player_name = ask_for_text_input()
 Commander Hyperion: I see, nice to meet you, {{GameState.player_name}}.
-Commander Hyperion: You are tasked with defeating the alien ships who are attacking our home planet. No doubt you've heard about the news?
+Commander Hyperion: You are tasked with defeating the alien ships who are heading towards earth. No doubt you've heard about the news?
 - Yes I've heard about it
 	Commander Hyperion: Prepared. That's a good quality to have, {{GameState.player_name}}.
 - No, I haven't
-	Commander Hyperion: Prepared. 
+	Commander Hyperion: Well, long story short, there's a fleet of alien spaceships on their way. Red alert.
+Commander Hyperion: Of course, we have a spacecraft for you to control as well. Any vessel needs a name though, what would you like to name it?
+do GameState.player_ship_name = ask_for_text_input()
+Commander Hyperion: {{GameState.player_ship_name}}. That's a mighty fine name for a craft for defending the world.
+Commander Hyperion: Humaninity needs your help to destroy these space invaders! Go forth!
 => END

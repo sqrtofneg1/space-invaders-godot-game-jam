@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://b8qgljfi4ut1u" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="Texture2D" uid="uid://cn5ltcek2txah" path="res://common/Stars layer.png" id="2_u5opy"]
 [ext_resource type="PackedScene" uid="uid://dfq6d3x5qit4i" path="res://components/player/player.tscn" id="2_vasa2"]
+[ext_resource type="FontFile" uid="uid://bb2qxnta7v2bm" path="res://common/space_invaders.ttf" id="2_y36n6"]
 [ext_resource type="Texture2D" uid="uid://bn1sm80rful7x" path="res://common/Nebula layer.png" id="3_y36n6"]
 [ext_resource type="AudioStream" uid="uid://c0ffv1l8nwtck" path="res://common/sfx/hit.wav" id="4_4fuuu"]
 [ext_resource type="AudioStream" uid="uid://o44jal8svjmx" path="res://common/sfx/victory.wav" id="5_dxrkv"]
+[ext_resource type="AudioStream" uid="uid://b5o054y16raue" path="res://common/Super Mario Galaxy 2 Soundtrack - Bowsers Galaxy Generator.ogg" id="8_y36n6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oj3vu"]
 
@@ -41,7 +43,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 100
+theme_override_fonts/font = ExtResource("2_y36n6")
+theme_override_font_sizes/font_size = 120
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -114,5 +117,54 @@ max_polyphony = 8
 [node name="VictorySFX" type="AudioStreamPlayer" parent="." unique_id=144659012]
 unique_name_in_owner = true
 stream = ExtResource("5_dxrkv")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1208196771]
+offset = Vector2(50, 830)
+transform = Transform2D(1, 0, 0, 1, 50, 830)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD" unique_id=396359099]
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer" unique_id=462128676]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/VBoxContainer/HBoxContainer" unique_id=61332344]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5380732, 0.82179207, 0, 1)
+theme_override_fonts/font = ExtResource("2_y36n6")
+theme_override_font_sizes/font_size = 20
+text = "Pilot: "
+
+[node name="HudPlayerName" type="Label" parent="HUD/VBoxContainer/HBoxContainer" unique_id=223119370]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_y36n6")
+theme_override_font_sizes/font_size = 20
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/VBoxContainer" unique_id=1322419421]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/VBoxContainer/HBoxContainer2" unique_id=2023637570]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5380732, 0.82179207, 0, 1)
+theme_override_fonts/font = ExtResource("2_y36n6")
+theme_override_font_sizes/font_size = 20
+text = "Ship: "
+
+[node name="HudShipName" type="Label" parent="HUD/VBoxContainer/HBoxContainer2" unique_id=1096422866]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_y36n6")
+theme_override_font_sizes/font_size = 20
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=738900171]
+stream = ExtResource("8_y36n6")
+volume_db = -2.737
+autoplay = true
+parameters/looping = false
 
 [connection signal="body_entered" from="EnemyContainer/BottomBoundary" to="." method="_on_bottom_boundary_body_entered"]

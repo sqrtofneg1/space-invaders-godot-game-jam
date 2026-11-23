@@ -1,0 +1,25 @@
+~ start
+Commander Hyperion: Good work, {{GameState.player_name}}. Just one more fight to go.
+- Still? The news have stopped reporting on the aliens, we seem to be safe now? => question_commander
+- We seem to be on the offensive, rather than the defensive, sir? => question_commander
+- Of course, I am here to serve. => submissive
+=> END
+
+~ question_commander
+Commander Hyperion: Are you questioning me, {{GameState.player_name}}? Or should I say, {{GameState.real_player_name}}?
+- How... do you know my real name?
+	Commander Hyperion: I see you, {{GameState.real_player_name}}. You will destroy all of these aliens, or you will die trying.
+	- I refuse.
+		do get_tree().quit()
+	- Fine.
+		Commander Hyperion: You're the space invader now.
+- Sir, no sir.
+	Commander Hyperion: Go and fight for humanity, {{GameState.real_player_name}}.
+	Commander Hyperion: You're the space invader now.
+=> END
+
+~ submissive
+Commander Hyperion: The end is nigh, {{GameState.player_name}}. You have done us all a good service.
+Commander Hyperion: The world will remember your efforts, {{GameState.real_player_name}}.
+Commander Hyperion: Good luck, space invader! Decimate all of those aliens!
+=> END

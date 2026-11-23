@@ -4,7 +4,7 @@ var player_name: String = ""
 var player_ship_name: String = ""
 var real_player_name: String = ""
 var real_player_ship_name: String = ""
-
+var level: int = 1
 
 func _get_os_env_variables() -> void:
 	if OS.has_environment("USERNAME"):

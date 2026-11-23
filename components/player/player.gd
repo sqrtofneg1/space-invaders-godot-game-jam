@@ -23,7 +23,10 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var input := Input.get_axis("move_left", "move_right")
 	velocity.x = input * move_speed
-	move_and_collide(velocity * delta)
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		var collider = collision.get_collider()
+		print("Hit: ", collider.name)
 
 
 # Fire projectile
@@ -42,3 +45,8 @@ func shoot() -> void:
 func hit() -> void:
 	destroyed.emit()
 	queue_free()
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		hit()

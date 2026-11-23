@@ -1,0 +1,9 @@
+~ start
+Commander Hyperion: Well done, {{GameState.player_name}}.
+- Did we do it? Is the planet saved?
+	Commander Hyperion: No, not quite.
+- Happy to serve, Commander.
+	Commander Hyperion: Good. You're exactly the type of soldier we want.
+Commander Hyperion: Unfortunately, I have some bad news. There seems to be a second wave incoming.
+Commander Hyperion: Go forth and decimate those invaders!
+=> END

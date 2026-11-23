@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b5o054y16raue"
+path="res://.godot/imported/Super Mario Galaxy 2 Soundtrack - Bowsers Galaxy Generator.ogg-aebbc10a7a04d24d4f8454d35571307f.oggvorbisstr"
+
+[deps]
+
+source_file="res://common/Super Mario Galaxy 2 Soundtrack - Bowsers Galaxy Generator.ogg"
+dest_files=["res://.godot/imported/Super Mario Galaxy 2 Soundtrack - Bowsers Galaxy Generator.ogg-aebbc10a7a04d24d4f8454d35571307f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
