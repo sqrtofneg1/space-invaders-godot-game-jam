@@ -75,8 +75,6 @@ autostart = true
 [node name="EnemyContainer" type="Node2D" parent="." unique_id=2075337948]
 unique_name_in_owner = true
 
-[node name="EnemySpawnTimer" type="Timer" parent="EnemyContainer" unique_id=473587646]
-
 [node name="SpawnPoint" type="Marker2D" parent="EnemyContainer" unique_id=1504121306]
 unique_name_in_owner = true
 position = Vector2(960, 50)

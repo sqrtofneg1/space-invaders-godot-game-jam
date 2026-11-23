@@ -16,10 +16,19 @@ const ENEMY = preload("res://components/enemy/enemy.tscn")
 
 # Game setup
 func _ready() -> void:
+	DialogueManager.dialogue_started.connect(_on_dialogue_started)
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
+	_do_dialog_1()
 	enemy_shoot_timer.timeout.connect(_on_enemy_shoot_timer_timeout)
 	game_restart_delay.timeout.connect(_on_game_restart_delay_timeout)
 	player.destroyed.connect(_on_player_destroyed)
 	_add_enemies(10)
+
+func _on_dialogue_started(_resource: DialogueResource) -> void:
+	get_tree().paused = true
+
+func _on_dialogue_ended(_resource: DialogueResource) -> void:
+	get_tree().paused = false
 
 
 # Restart game by reloading the current scene
@@ -29,10 +38,11 @@ func restart() -> void:
 
 # Check for victory by all enemies destroyed (unless already game over)
 func check_for_victory() -> void:
-	print(enemies.size())
 	if not enemies.is_empty() or not game_restart_delay.is_stopped():
 		return
-	
+	for timer in get_tree().get_nodes_in_group("enemy_spawn_timers"):
+		if timer is Timer and not timer.is_stopped():
+			return
 	announcement_label.text = "VICTORY"
 	game_restart_delay.start()
 	victory_sfx.play()
@@ -75,17 +85,18 @@ func _add_enemies(number_to_add: int) -> void:
 	print("in add enemies")
 	for i in number_to_add:
 		var timer = Timer.new()
-		timer.wait_time = i + 1
+		timer.add_to_group("enemy_spawn_timers")
+		timer.wait_time = i + 0.5
 		timer.timeout.connect(_spawn_enemy)
 		timer.one_shot = true
 		timer.autostart = true
 		add_child(timer)
 
 func _spawn_enemy() -> void:
-	print("HERE")
 	var new_enemy = ENEMY.instantiate()
 	enemy_container.add_child(new_enemy)
 	new_enemy.global_position = spawn_point.global_position
+	new_enemy.global_position.x = randf_range(10, 1800)
 	enemies.append(new_enemy)
 	new_enemy.destroyed.connect(_on_enemy_destroyed.bind(new_enemy))
 
@@ -93,3 +104,8 @@ func _on_bottom_boundary_body_entered(body: Node2D) -> void:
 	print(body.position)
 	if body is Enemy:
 		body.global_position.y = spawn_point.global_position.y
+
+
+func _do_dialog_1() -> void:
+	DialogueManager.show_dialogue_balloon(load("res://mission1.dialogue"))
+	

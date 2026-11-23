@@ -1,0 +1,12 @@
+~ start
+Commander Hyperion: Hello, solider.
+Commander Hyperion: The Astral Encroachment Guard & Interception System, or AEGIS for short, thanks you for volunteering to keep our world safe.
+Commander Hyperion: Before we begin, what is your name?
+do GameState.player_name = ask_for_text_input()
+Commander Hyperion: I see, nice to meet you, {{GameState.player_name}}.
+Commander Hyperion: You are tasked with defeating the alien ships who are attacking our home planet. No doubt you've heard about the news?
+- Yes I've heard about it
+	Commander Hyperion: Prepared. That's a good quality to have, {{GameState.player_name}}.
+- No, I haven't
+	Commander Hyperion: Prepared. 
+=> END

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ydsgq8axt3rl" path="res://common/Space Invaders Logo.png" id="1_20tr2"]
 [ext_resource type="Script" uid="uid://bl67qfo76vk7u" path="res://game/main_menu.gd" id="1_wo36y"]
 [ext_resource type="Shader" uid="uid://u4tmhdpgt8wp" path="res://common/space_background.gdshader" id="3_2ed8k"]
+[ext_resource type="AudioStream" uid="uid://d3ohki2xa0vpo" path="res://common/sfx/01. Among Us Theme.mp3" id="5_t606k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hatf2"]
 shader = ExtResource("3_2ed8k")
@@ -52,5 +53,9 @@ theme_override_fonts/font = ExtResource("1_2gctw")
 theme_override_font_sizes/font_size = 46
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2ed8k")
 text = "Start"
+
+[node name="MainMenuAudio" type="AudioStreamPlayer2D" parent="." unique_id=527647909]
+unique_name_in_owner = true
+stream = ExtResource("5_t606k")
 
 [connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
